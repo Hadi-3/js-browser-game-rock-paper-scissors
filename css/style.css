@@ -17,7 +17,7 @@ header {
     min-height: 20px;
 }
 
-button {
+.game-button {
     margin: 10px;
     font-size: 40px;
     background-color: transparent;
@@ -28,8 +28,20 @@ button {
     
 }
 
-button:hover {
-   
+.game-button:hover {
+    transition: 0.5s; 
     border: 1px solid rgba(0, 0, 0, .5);
     cursor: pointer;
+}
+
+#resetButton {
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+
+#resetButton:hover {
+    cursor: pointer;
+    background-color: red;
+    color: aliceblue;
+    transition: 0.5s;
 }

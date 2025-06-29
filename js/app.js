@@ -11,11 +11,11 @@ let computerChoice
 
 /* -------------- Cached Element References --------------*/
 const rockBtnEl = document.querySelector('#rock')
-console.log(rockBtnEl)
 const paperBtnEl = document.querySelector('#paper')
-console.log(paperBtnEl)
 const scissorsBtnEl = document.querySelector('#scissors')
-console.log(scissorsBtnEl)
+const resultDisplayEl = document.querySelector('#result-display')
+const resetBtnEl = document.querySelector('#resetButton')
+
 
 /* -------------- Functions --------------*/
 
@@ -28,22 +28,50 @@ function getComputerChoice() {
 }
 
 // initialize game state
-function play() {
+function play(event) {
     computerChoice = getComputerChoice()
-console.log(computerChoice)
+    playerChoice = event.target.id
     // after updating state, render to html
+    compare()
     render()
-
+   
 }
 
-play()
 
 // updates our UI/html directly
 function render() {
+    resultDisplayEl.textContent = `Computer chose ${computerChoice} and you chose ${playerChoice}. ${msg}`
+}
 
+function compare() {
+    // compare playerChoice to computerChoice
+    if (playerChoice === computerChoice ) {
+        msg = 'You ties!'
+    } else if (playerChoice === 'rock' && computerChoice === 'scissors') {
+        msg = 'You Win!'
+    } else if (playerChoice === 'rock' && computerChoice === 'paper') {
+        msg = 'You Lose!'
+    } else if (playerChoice === 'paper' && computerChoice === 'rock') {
+        msg = 'You Win!'
+    } else if (playerChoice === 'paper' && computerChoice === 'scissors') {
+        msg = 'You Lose!'
+    } else if (playerChoice === 'scissors' && computerChoice === 'paper') {
+        msg = 'You Win!'
+    } else {
+         msg = 'You Lose!'
+    }
+ 
+}
+
+function resetGame() {
+resultDisplayEl.textContent = ''
+playerChoice = null
+computerChoice = null
 }
 
 
-
-
 /* -------------- Event Listeners --------------*/
+rockBtnEl.addEventListener('click', play)
+paperBtnEl.addEventListener('click', play)
+scissorsBtnEl.addEventListener('click', play)
+resetBtnEl.addEventListener('click', resetGame)
